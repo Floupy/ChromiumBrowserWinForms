@@ -34,12 +34,7 @@ namespace ChromiumBrowserWinForms
         private void InitializeBrowserTabs()
         {
             BrowserTabs.TabPages.Clear();
-            BrowserTabs.TabPages.Add("Tab 1");
-            // Create a browser component
-            chromeBrowser = new ChromiumWebBrowser(initialURL);
-            // Add it to the form and fill it to the form window.
-            BrowserTabs.TabPages[0].Controls.Add(chromeBrowser);
-            chromeBrowser.Dock = DockStyle.Fill;
+            AddNewTab();
         }
 
         private void Browser_FormClosing(object sender, FormClosingEventArgs e)
@@ -79,11 +74,15 @@ namespace ChromiumBrowserWinForms
 
         private void ButtonAddTab_Click(object sender, EventArgs e)
         {
+            AddNewTab();
+        }
+
+        private void AddNewTab()
+        {
             var tp = new TabPage();
             tp.Text = "Tab " + Convert.ToString(BrowserTabs.TabPages.Count + 1);
-
-            BrowserTabs.TabPages.Add(tp);            
-            chromeBrowser = new ChromiumWebBrowser(initialURL);            
+            BrowserTabs.TabPages.Add(tp);
+            chromeBrowser = new ChromiumWebBrowser(initialURL);
             tp.Controls.Add(chromeBrowser);
             chromeBrowser.Dock = DockStyle.Fill;
         }
