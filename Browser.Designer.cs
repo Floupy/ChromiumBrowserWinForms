@@ -36,6 +36,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ButtonAddTab = new System.Windows.Forms.ToolStripButton();
+            this.ButtonRemoveTab = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.BrowserTabs.SuspendLayout();
             this.SuspendLayout();
@@ -46,7 +47,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ButtonGo,
             this.AddressBar,
-            this.ButtonAddTab});
+            this.ButtonAddTab,
+            this.ButtonRemoveTab});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 48);
@@ -70,6 +72,7 @@
             this.AddressBar.Name = "AddressBar";
             this.AddressBar.Size = new System.Drawing.Size(400, 48);
             this.AddressBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AddressBar_KeyDown);
+            this.AddressBar.Click += new System.EventHandler(this.AddressBar_Click);
             // 
             // BrowserTabs
             // 
@@ -109,9 +112,20 @@
             this.ButtonAddTab.Image = ((System.Drawing.Image)(resources.GetObject("ButtonAddTab.Image")));
             this.ButtonAddTab.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ButtonAddTab.Name = "ButtonAddTab";
-            this.ButtonAddTab.Size = new System.Drawing.Size(77, 45);
-            this.ButtonAddTab.Text = "Add";
+            this.ButtonAddTab.Size = new System.Drawing.Size(43, 45);
+            this.ButtonAddTab.Text = "+";
             this.ButtonAddTab.Click += new System.EventHandler(this.ButtonAddTab_Click);
+            // 
+            // ButtonRemoveTab
+            // 
+            this.ButtonRemoveTab.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ButtonRemoveTab.Font = new System.Drawing.Font("Segoe UI", 18F);
+            this.ButtonRemoveTab.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRemoveTab.Image")));
+            this.ButtonRemoveTab.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonRemoveTab.Name = "ButtonRemoveTab";
+            this.ButtonRemoveTab.Size = new System.Drawing.Size(34, 45);
+            this.ButtonRemoveTab.Text = "-";
+            this.ButtonRemoveTab.Click += new System.EventHandler(this.ButtonRemoveTab_Click);
             // 
             // Browser
             // 
@@ -140,6 +154,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ToolStripButton ButtonAddTab;
+        private System.Windows.Forms.ToolStripButton ButtonRemoveTab;
     }
 }
 

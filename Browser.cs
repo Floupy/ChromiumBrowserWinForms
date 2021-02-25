@@ -58,17 +58,21 @@ namespace ChromiumBrowserWinForms
         {
             string googleURL = $"https://www.google.com/search?q=";
             string addressBarUrl = AddressBar.Text;
+            ChromiumWebBrowser currentBrowser = null;
+
+            currentBrowser = (ChromiumWebBrowser)BrowserTabs.SelectedTab.Controls[0];
+
             bool urlPrefix = 
                 addressBarUrl.Contains("https://") || 
                 addressBarUrl.Contains("http://") ||
                 addressBarUrl.Contains("www.");
             if (urlPrefix)
             {
-                chromeBrowser.Load(addressBarUrl);
+                currentBrowser.Load(addressBarUrl);
             }
             else
             {
-                chromeBrowser.Load(googleURL + addressBarUrl);
+                currentBrowser.Load(googleURL + addressBarUrl);
             }  
         }
 
@@ -86,6 +90,22 @@ namespace ChromiumBrowserWinForms
             tp.Controls.Add(chromeBrowser);
             chromeBrowser.Dock = DockStyle.Fill;
         }
+
+        private void ButtonRemoveTab_Click(object sender, EventArgs e)
+        {          
+            var tp = BrowserTabs.TabPages[BrowserTabs.TabPages.Count - 1];
+            BrowserTabs.TabPages.Remove(tp);
+            tp.Controls.Remove(chromeBrowser);           
+        }
+
+        private void AddressBar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //TASK:
+        //1. Make sure that we can navigate with address bar in any tab
+        //2. Add Remove button, which will remove the last tab
 
 
 
