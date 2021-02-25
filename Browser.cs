@@ -21,17 +21,24 @@ namespace ChromiumBrowserWinForms
         {
             InitializeComponent();
             InitializeChromium();
+            InitializeBrowserTabs();
         }
 
         public void InitializeChromium()
         {
             CefSettings settings = new CefSettings();
             // Initialize cef with the provided settings
-            Cef.Initialize(settings);
+            Cef.Initialize(settings);           
+        }
+
+        private void InitializeBrowserTabs()
+        {
+            BrowserTabs.TabPages.Clear();
+            BrowserTabs.TabPages.Add("Tab 1");
             // Create a browser component
             chromeBrowser = new ChromiumWebBrowser(initialURL);
             // Add it to the form and fill it to the form window.
-            this.Controls.Add(chromeBrowser);
+            BrowserTabs.TabPages[0].Controls.Add(chromeBrowser);
             chromeBrowser.Dock = DockStyle.Fill;
         }
 
@@ -42,9 +49,47 @@ namespace ChromiumBrowserWinForms
 
         private void ButtonGo_Click(object sender, EventArgs e)
         {
-            string addressBarURL = AddressBar.Text;
-            chromeBrowser.Load(addressBarURL);
+            NavigateToURL();
         }
+        private void AddressBar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                NavigateToURL();
+            }
+        }
+
+        private void NavigateToURL()
+        {
+            string googleURL = $"https://www.google.com/search?q=";
+            string addressBarUrl = AddressBar.Text;
+            bool urlPrefix = 
+                addressBarUrl.Contains("https://") || 
+                addressBarUrl.Contains("http://") ||
+                addressBarUrl.Contains("www.");
+            if (urlPrefix)
+            {
+                chromeBrowser.Load(addressBarUrl);
+            }
+            else
+            {
+                chromeBrowser.Load(googleURL + addressBarUrl);
+            }  
+        }
+
+        private void ButtonAddTab_Click(object sender, EventArgs e)
+        {
+            var tp = new TabPage();
+            tp.Text = "Tab " + Convert.ToString(BrowserTabs.TabPages.Count + 1);
+
+            BrowserTabs.TabPages.Add(tp);            
+            chromeBrowser = new ChromiumWebBrowser(initialURL);            
+            tp.Controls.Add(chromeBrowser);
+            chromeBrowser.Dock = DockStyle.Fill;
+        }
+
+
+
 
         //Homework for Feb 25, 2021
         //1. Add Back and Forward buttons, make sure that they work
