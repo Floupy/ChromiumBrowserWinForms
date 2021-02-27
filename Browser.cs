@@ -73,11 +73,26 @@ namespace ChromiumBrowserWinForms
             var browser = new ChromiumWebBrowser(homeUrl);
             tp.Controls.Add(browser);
             browser.Dock = DockStyle.Fill;
+            
+            chromeBrowser = browser;
+            BrowserTabs.SelectTab(tp);
         }
 
         private void BrowserTabs_Selected(object sender, TabControlEventArgs e)
         {
             chromeBrowser = (ChromiumWebBrowser)BrowserTabs.SelectedTab.Controls[0];
+        }
+
+        private void ButtonTabRemove_Click(object sender, EventArgs e)
+        {
+            var tp = BrowserTabs.TabPages[BrowserTabs.TabPages.Count - 1];
+            
+            if(BrowserTabs.TabPages.Count > 1)
+            {
+                BrowserTabs.TabPages.Remove(tp);
+                tp = BrowserTabs.TabPages[BrowserTabs.TabPages.Count - 1];
+                BrowserTabs.SelectTab(tp);
+            }            
         }
 
 

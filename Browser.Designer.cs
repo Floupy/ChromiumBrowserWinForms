@@ -36,6 +36,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ButtonAddTab = new System.Windows.Forms.ToolStripButton();
+            this.ButtonTabRemove = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.BrowserTabs.SuspendLayout();
             this.SuspendLayout();
@@ -46,7 +47,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ButtonGo,
             this.AddressBar,
-            this.ButtonAddTab});
+            this.ButtonAddTab,
+            this.ButtonTabRemove});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 48);
@@ -114,6 +116,17 @@
             this.ButtonAddTab.Text = "+";
             this.ButtonAddTab.Click += new System.EventHandler(this.ButtonAddTab_Click);
             // 
+            // ButtonTabRemove
+            // 
+            this.ButtonTabRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ButtonTabRemove.Font = new System.Drawing.Font("Segoe UI", 18F);
+            this.ButtonTabRemove.Image = ((System.Drawing.Image)(resources.GetObject("ButtonTabRemove.Image")));
+            this.ButtonTabRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonTabRemove.Name = "ButtonTabRemove";
+            this.ButtonTabRemove.Size = new System.Drawing.Size(34, 45);
+            this.ButtonTabRemove.Text = "-";
+            this.ButtonTabRemove.Click += new System.EventHandler(this.ButtonTabRemove_Click);
+            // 
             // Browser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -140,6 +153,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ToolStripButton ButtonAddTab;
+        private System.Windows.Forms.ToolStripButton ButtonTabRemove;
     }
 }
 
