@@ -49,7 +49,6 @@ namespace ChromiumBrowserWinForms
         private void Navigate()
         {
             string url = AddressBar.Text;
-            chromeBrowser = (ChromiumWebBrowser)BrowserTabs.SelectedTab.Controls[0];
 
             if (url.Contains("http://") || url.Contains("https://") || url.Contains("www."))
             {
@@ -76,8 +75,10 @@ namespace ChromiumBrowserWinForms
             browser.Dock = DockStyle.Fill;
         }
 
-
-
+        private void BrowserTabs_Selected(object sender, TabControlEventArgs e)
+        {
+            chromeBrowser = (ChromiumWebBrowser)BrowserTabs.SelectedTab.Controls[0];
+        }
 
 
         //Homework for Feb 27, 2021
