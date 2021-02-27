@@ -28,18 +28,57 @@ namespace ChromiumBrowserWinForms
             CefSettings settings = new CefSettings();
             // Initialize cef with the provided settings
             Cef.Initialize(settings);
-            // Create a browser component
-            chromeBrowser = new ChromiumWebBrowser(homeUrl);
-            // Add it to the form and fill it to the form window.
-            this.Controls.Add(chromeBrowser);
-            chromeBrowser.Dock = DockStyle.Fill;
+            // Create the first browser tab            
+            BrowserTabs.TabPages.Clear();
+            AddBrowserTab();
         }
 
         private void ButtonGo_Click(object sender, EventArgs e)
         {
-            string url = AddressBar.Text;
-            chromeBrowser.Load(url);
+            Navigate();
         }
+
+        private void AddressBar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Navigate();
+            }
+        }
+
+        private void Navigate()
+        {
+            string url = AddressBar.Text;
+            chromeBrowser = (ChromiumWebBrowser)BrowserTabs.SelectedTab.Controls[0];
+
+            if (url.Contains("http://") || url.Contains("https://") || url.Contains("www."))
+            {
+                chromeBrowser.Load(url);
+            }
+            else
+            {
+                chromeBrowser.Load($"https://duckduckgo.com?q= {url}");
+            }            
+        }
+
+        private void ButtonAddTab_Click(object sender, EventArgs e)
+        {
+            AddBrowserTab();
+        }
+
+        private void AddBrowserTab()
+        {
+            var tp = new TabPage();
+            tp.Text = "Tab";
+            BrowserTabs.TabPages.Add(tp);
+            var browser = new ChromiumWebBrowser(homeUrl);
+            tp.Controls.Add(browser);
+            browser.Dock = DockStyle.Fill;
+        }
+
+
+
+
 
         //Homework for Feb 27, 2021
         //1. Add Back and Forward buttons, make sure that they work
